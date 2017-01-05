@@ -6,7 +6,7 @@ router.get('/', function(req, res, next) {
   res.render('index',{title: 'Express' });
 });
 
-module.exports = router;
+
 
 
 var mongoose = require('mongoose');
@@ -44,6 +44,19 @@ router.param('post', function(req, res, next, id) {
   });
 });
 
+//router.param()
+router.param('comment', function(req, res, next, id) {
+    var query = Comment.findById(id);
+
+    query.exec(function (err, comment){
+        if (err) { return next(err); }
+        if (!comment) { return next(new Error('can\'t find comment')); }
+
+        req.comment = comment;
+        return next();
+    });
+});
+
 router.get('/posts/:post', function(req, res, next) {
     req.post.populate('comments', function(err, post) {
         if (err) { return next(err); }
@@ -60,6 +73,13 @@ router.put('/posts/:post/upvote', function(req, res, next) {
   });
 });
 
+router.put('/posts/:post/downvote', function(req, res, next) {
+    req.post.downvote(function(err, post){
+        if (err) { return next(err); }
+
+        res.json(post);
+    });
+});
 
 
 router.post('/posts/:post/comments', function(req, res, next) {
@@ -79,23 +99,18 @@ router.post('/posts/:post/comments', function(req, res, next) {
 });
 
 ///posts/:post/comments/:comment/upvote
-router.put('posts/:post/comments/:comment/upvote', function(req, res, next) {
-    req.post.upvote(function(err, comment){
+router.put('/posts/:post/comments/:comment/upvote', function(req, res, next) {
+    req.comment.upvote(function(err, comment){
         if (err) { return next(err); }
-
         res.json(comment);
     });
 });
-//router.param()
-router.param('comment', function(req, res, next, id) {
-    var query = Post.findById(id);
 
-    query.exec(function (err, comment){
+router.put('/posts/:post/comments/:comment/downvote', function(req, res, next) {
+    req.comment.downvote(function(err, comment){
         if (err) { return next(err); }
-        if (!post) { return next(new Error('can\'t find comment')); }
-
-        req.post = comment;
-        return next();
+        res.json(comment);
     });
 });
 
+module.exports = router;

@@ -12,7 +12,10 @@
     <script src="/javascripts/angularApp.js"></script>
 	<script src="http://cdnjs.cloudflare.com/ajax/libs/angular-ui-router/0.2.10/angular-ui-router.js"></script>
 
-    <style> .glyphicon-thumbs-up { cursor:pointer } </style>
+	<link rel="stylesheet" type="text/css" href="/stylesheets/style.css">
+    <style> .glyphicon-chevron-up { cursor:pointer }
+		.glyphicon-chevron-down { cursor:pointer }
+	</style>
 </head>
 
 <!-- links the body with the app-->
@@ -48,21 +51,58 @@
 	    <h1>{{test}}</h1>
 	  </div>
 
+	  <!--Individual post-->
 	<div ng-repeat="post in posts">
-		<span class="glyphicon glyphicon-thumbs-up" ng-click="incrementUpvote(post)"></span>
-			{{post.upvotes}}
-		<div>
-			<a ng-show="post.link" href="{{post.link}}">{{post.title}}</a>
-			<span ng-hide="post.link">
-				{{post.title}}
-			</span>
-			<span>
-				<a href="#/posts/{{post._id}}">Comments</a>
-			</span>
+		<div class = "post">
+		<div class = "postVotes">
+			<table style="width:100%">
+				<tr>
+					<td align="center" valign="middle">
+						<span class="glyphicon glyphicon-chevron-up" ng-click="incrementUpvotes(post)"></span>
+					</td>
+				</tr>
+				<tr>
+					<td align="center" valign="middle">{{post.upvotes}}</td>
+				</tr>
+				<tr>
+					<td align="center" valign="middle">
+						<span class="glyphicon glyphicon-chevron-down" ng-click="decrementUpvotes(post)"></span>
+					</td>
+				</tr>
+			</table>
+		</div>
+			<table class="postContent">
+				<tr>
+					<th>
+					<a ng-show="post.link" href="{{post.link}}">{{post.title}}</a>
+						<span ng-hide="post.link">
+							{{post.title}}
+						</span>
+					</th>
+				</tr>
+				<tr>
+					<td>
+						<span class="postAddress" ng-show="post.link">({{post.link}}) - date</span>
+						<span class="postAddress" ng-hide="post.link"> - </span>
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<span>
+							<a href="#/posts/{{post._id}}">Comments</a>
+						</span>
+					</td>
+				</tr>
+			</table>
+		</div>
+		<br>
 		</div>
 	</div>
 
-	<form ng-submit="addPost()" style="margin-top:30px;">
+
+	  <!--Create new Post Section-->
+	  <div class="postAdd">
+	<form ng-submit="addPost()" >
 		<h3>Add a new post</h3>
 
 		<div class="form-group">
@@ -73,10 +113,7 @@
 		</div>
 		<button class = "btn btn-primary" type="submit">Post</button>
 	</form>
-	  <span>
-	  	<a href="#/posts/{{$index}}">Comments</a>
-	  </span>
-
+	  </div>
 	  <!-- rest of template -->
 	</script>
 
@@ -100,11 +137,38 @@
 	<!-- loops through a array list, sort array by upvotes-->
 	<div ng-repeat="comment in post.comments | orderBy: '-upvotes'">
 
-		<p>{{comment.body}}</p>
 		<!-- a button to increase votes-->
-		<span class="glyphicon glyphicon-thumbs-up" ng-click="incrementUpvote(comment)"></span>
-		{{comment.upvotes}} - by {{comment.author}}
+		<div class = "post">
+		<div class = "postVotes">
+		<table style="width:100%">
+			<tr>
+				<td align="center" valign="middle">
+					<span class="glyphicon glyphicon-chevron-up" ng-click="incrementUpvotes(comment)"></span>
+				</td>
+			</tr>
+			<tr>
+				<td align="center" valign="middle">{{comment.upvotes}}</td>
+			</tr>
+			<tr>
+				<td align="center" valign="middle">
+					<span class="glyphicon glyphicon-chevron-down" ng-click="decrementUpvotes(comment)"></span>
+				</td>
+			</tr>
+		</table>
+		</div>
+		<div class = "postContent">
+		<table>
+			<tr>
+				<td>
+					<p>{{comment.body}} - by {{comment.author}}</p>
+				</td>
+			</tr>
+		</table>
+		</div>
+		</div>
+
 		<hr>
+
 	</div>
 	
 

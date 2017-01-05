@@ -6,3 +6,36 @@ body {
 a {
   color: #00B7FF;
 }
+
+.postVotes{
+  float: left;
+  display: inline-block;
+  text-align: center;
+  padding: 10px;
+  vertical-align:middle;
+  margin-right: 5px;
+}
+.postContent{
+
+}
+.postContent th{
+    font-size: 1.4em;
+}
+
+.postAddress{
+  font-size: 0.8em;
+  color: #aaa;
+}
+.post{
+  margin: 10px;
+  float: left;
+  display: inline-block;
+  width: 100%;
+  min-height: 50px;
+  border-bottom: 1px solid #EEE;
+}
+
+.postAdd{
+  display:inline-block;
+  width: 100%;
+}
