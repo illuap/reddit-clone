@@ -37,7 +37,7 @@ UserSchema.methods.generateJWT = function(){
         _id: this._id,
         username: this.username,
         exp: parseInt(exp.getTime()/1000)
-    }, 'SECRET'); //TODO: USE AN ENVIRONMENT VARIABLE TO REFFERENCE
+    }, 'Secret'); //TODO: USE AN ENVIRONMENT VARIABLE TO REFFERENCE
 };
 
 //let mongodb know about the model named User using the schema UserSchema
