@@ -124,11 +124,13 @@
 					<td class="postAddress">
 						<span ng-show="post.link">({{post.link}}) - date</span>
 						<span ng-hide="post.link"> - </span>
-						<span>Posted by - <a>{{post.author}}</a></span>
+
 					</td>
 				</tr>
 				<tr>
 					<td>
+						<span>Posted by: <a>{{post.author}}</a></span>
+						|
 						<span>
 							<a href="#/posts/{{post._id}}">Comments</a>
 						</span>
@@ -159,9 +161,6 @@
 	</div>
 	  <!-- rest of template -->
 	</script>
-
-
-
 
 	<!-- POSTS TEMPLATE-->
 	<script type="text/ng-template" id="/posts.html">
@@ -201,11 +200,14 @@
 		</div>
 		<div class = "postContent">
 		<table>
-			<tr>
-				<td>
-					<p>{{comment.body}} - by {{comment.author}}</p>
-				</td>
-			</tr>
+			<td>
+				<tr>
+					<p>{{comment.body}}</p>
+				</tr>
+				<tr>
+					<span>Posted by: <a>{{comment.author}}</a></span>
+				</tr>
+			</td>
 		</table>
 		</div>
 		</div>
@@ -225,8 +227,6 @@
 	</form>
 	<a href="/#/login">Sign In</a> or <a href="/#/register">Register</a> make a comment!
 	</script>
-
-
 
 	<!-- REGISTER TEMPLATE-->
 	<script type="text/ng-template" id="/register.html">

@@ -108,7 +108,7 @@ app.factory('posts', [ '$http','auth',function($http,auth){
 		});
 	};
 	o.addComment = function(id, comment){
-		return $http.post('/posts/' + id + '/comments', {
+		return $http.post('/posts/' + id + '/comments', comment, {
             headers: {Authorization: 'Bearer ' + auth.getToken()}
         });
 	};
@@ -143,14 +143,6 @@ app.controller('MainCtrl', [
         $scope.isLoggedIn = auth.isLoggedIn;
 		$scope.posts = posts.posts;
 		$scope.author = auth.currentUser();
-        console.log(''+$scope.author);
-		/*$scope.posts = [
-			{title: 'post 1',upvotes: 5},
-			{title: 'post 2',upvotes: 3},
-			{title: 'post 3',upvotes: 14},
-			{title: 'post 4',upvotes: 6},
-			{title: 'post 5',upvotes: 20}
-		]; */
 
 		$scope.addPost = function(){
 			//filter the post to now allow blank posts
@@ -183,12 +175,13 @@ app.controller('PostsCtrl', [
 	function($scope, posts, post,auth){
 		$scope.post = post;
         $scope.isLoggedIn = auth.isLoggedIn;
+        $scope.author = auth.currentUser();
 
 		$scope.addComment = function(){
 			if($scope.body === ''){ return; }
 				posts.addComment(post._id,{
 					body: $scope.body,
-					author: auth.currentUser
+					author: $scope.author
 				}).success(function(comment){
 					$scope.post.comments.push(comment);
 			});
