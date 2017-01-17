@@ -15,8 +15,11 @@
 
     <script src="/javascripts/angularApp.js"></script>
 	<script src="http://cdnjs.cloudflare.com/ajax/libs/angular-ui-router/0.2.10/angular-ui-router.js"></script>
-
+	<script src="//cdn.jsdelivr.net/jquery.color-animation/1/mainfile"></script> <!--
+	https://bitstorm.org/jquery/color-animation/ -->
+	<script src="/javascripts/scripts.js"></script>
 	<link rel="stylesheet" type="text/css" href="/stylesheets/style.css">
+	<link rel="stylesheet" type="text/css" href="/stylesheets/animate.css">
     <style> .glyphicon-chevron-up { cursor:pointer }
 		.glyphicon-chevron-down { cursor:pointer }
 	</style>
@@ -98,7 +101,7 @@
 			<table style="width:100%">
 				<tr>
 					<td align="center" valign="middle">
-						<span class="glyphicon glyphicon-chevron-up" ng-click="incrementUpvotes(post)"></span>
+						<i class="glyphicon glyphicon-chevron-up upvote-icon" onclick="animateClick(this,'#98FB98')" ng-click="incrementUpvotes(post)"></i>
 					</td>
 				</tr>
 				<tr>
@@ -106,7 +109,7 @@
 				</tr>
 				<tr>
 					<td align="center" valign="middle">
-						<span class="glyphicon glyphicon-chevron-down" ng-click="decrementUpvotes(post)"></span>
+						<i class="glyphicon glyphicon-chevron-down" onclick="animateClick(this,'#f84e4e')" ng-click="decrementUpvotes(post)"></i>
 					</td>
 				</tr>
 			</table>

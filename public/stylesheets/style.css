@@ -38,3 +38,9 @@ a {
   display:inline-block;
   width: 100%;
 }
+
+i {
+  -vendor-animation-duration: 10s;
+  -vendor-animation-delay: 5s;
+  -vendor-animation-iteration-count: infinite;
+}
