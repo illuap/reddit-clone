@@ -144,13 +144,17 @@ app.controller('MainCtrl', [
 		$scope.posts = posts.posts;
 		$scope.author = auth.currentUser();
 
+
 		$scope.addPost = function(){
 			//filter the post to now allow blank posts
-			if(!$scope.title || $scope.title==''){return;} 
+			if(!$scope.title || $scope.title==''){return;}
+            $scope.date = new Date();
+
 			posts.create({
 				title: $scope.title,
 				link: $scope.link,
-				author: $scope.author
+				author: $scope.author,
+                created_date: $scope.date
 			});
 			$scope.title = ''; //reset the title
 			$scope.link = ''; //reset the link
@@ -177,11 +181,16 @@ app.controller('PostsCtrl', [
         $scope.isLoggedIn = auth.isLoggedIn;
         $scope.author = auth.currentUser();
 
+
+
 		$scope.addComment = function(){
 			if($scope.body === ''){ return; }
+            $scope.date = new Date();
+            console.log($scope.date);
 				posts.addComment(post._id,{
 					body: $scope.body,
-					author: $scope.author
+					author: $scope.author,
+                    created_date: $scope.date
 				}).success(function(comment){
 					$scope.post.comments.push(comment);
 			});

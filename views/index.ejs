@@ -122,9 +122,9 @@
 				</tr>
 				<tr>
 					<td class="postAddress">
-						<span ng-show="post.link">({{post.link}}) - date</span>
+						<span ng-show="post.link">({{post.link}})</span>
 						<span ng-hide="post.link"> - </span>
-
+						<span>Date: {{post.created_date | date:'medium'}}</span>
 					</td>
 				</tr>
 				<tr>
@@ -200,14 +200,21 @@
 		</div>
 		<div class = "postContent">
 		<table>
-			<td>
-				<tr>
+			<tr>
+				<td>
 					<p>{{comment.body}}</p>
-				</tr>
-				<tr>
-					<span>Posted by: <a>{{comment.author}}</a></span>
-				</tr>
+				</td>
+			</tr>
+			<tr>
+				<td class="postAddress">
+					<span>Date: {{comment.created_date | date:'medium'}}</span>
+				</td>
+			</tr>
+			<tr>
+			<td>
+				<span>Posted by: <a>{{comment.author}}</a></span>
 			</td>
+			</tr>
 		</table>
 		</div>
 		</div>
